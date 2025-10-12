@@ -230,12 +230,12 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Accerder\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutApp.cshtml" />
     <Content Include="Views\User\Borrar.cshtml" />
     <Content Include="Views\User\Consulta.cshtml" />
     <Content Include="Views\User\Editar.cshtml" />
     <Content Include="Views\User\Nuevo.cshtml" />
+    <Content Include="Views\Acceder\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
