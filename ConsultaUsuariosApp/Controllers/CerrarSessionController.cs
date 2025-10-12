@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace ConsultaUsuariosApp.Controllers
 {
     public class CerrarSessionController : Controller
     {
-        // GET: cerrarSession
-        public ActionResult Index()
+        // GET: CerrarSession/Logout
+        public ActionResult Logout()
         {
-            return View();
+            // Limpiar todas las variables de sesión
+            Session.Clear();
+            Session.Abandon();
+
+            // Redirigir al login
+            return RedirectToAction("Login", "Acceder");
         }
     }
 }

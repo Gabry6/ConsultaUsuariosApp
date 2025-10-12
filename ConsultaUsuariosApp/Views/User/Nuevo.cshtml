@@ -5,124 +5,361 @@
     Layout = "~/Views/Shared/_LayoutApp.cshtml";
 }
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+
 <style>
     .page-header {
-        background-color: #212121;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: #fff;
-        padding: 20px;
+        padding: 30px;
         margin: -30px -15px 30px -15px;
-        border-radius: 5px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        animation: slideDown 0.6s ease-out;
     }
 
-        .page-header h2 {
-            margin: 0;
-            font-size: 24px;
+    @@keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
         }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .page-header h2 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
 
     .form-container {
         background: #fff;
-        padding: 30px;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        max-width: 600px;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin: 0 auto;
+        animation: zoomIn 0.6s ease-out;
+    }
+
+    @@keyframes zoomIn {
+        from {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+        animation: slideUp 0.5s ease-out backwards;
+    }
+
+        .form-group:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .form-group:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .form-group:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .form-group:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .form-group:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .form-group:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+    @@keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     .form-group label {
-        font-weight: 500;
+        font-weight: 600;
         color: #333;
+        margin-bottom: 8px;
+        display: block;
+        font-size: 14px;
+    }
+
+        .form-group label i {
+            color: #667eea;
+            margin-right: 8px;
+        }
+
+    .input-wrapper {
+        position: relative;
+    }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+    .form-control, .form-control-select {
+        width: 100%;
+        padding: 12px 15px 12px 45px;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 15px;
+        transition: all 0.3s;
+        background: #f8f9fa;
+    }
+
+    .form-control-select {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23667eea' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 15px center;
+        padding-right: 45px;
+    }
+
+        .form-control:focus, .form-control-select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+            .form-control:focus ~ i {
+                color: #764ba2;
+                transform: translateY(-50%) scale(1.1);
+            }
+
+    .text-danger {
+        color: #dc3545;
+        font-size: 13px;
+        margin-top: 5px;
+        display: block;
+    }
+
+    .validation-summary-errors {
+        background: #fee;
+        border: 1px solid #fcc;
+        color: #c33;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+    }
+
+        .validation-summary-errors ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+    .btn-actions {
+        display: flex;
+        gap: 15px;
+        margin-top: 35px;
+        animation: fadeIn 0.8s ease-out;
+    }
+
+    @@keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
     }
 
     .btn-guardar {
-        background-color: #5cb85c;
+        flex: 1;
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
         color: #fff;
         border: none;
-        padding: 10px 30px;
-        margin-right: 10px;
+        padding: 14px 30px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 4px 15px rgba(17, 153, 142, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
     }
 
         .btn-guardar:hover {
-            background-color: #449d44;
-            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(17, 153, 142, 0.6);
         }
 
     .btn-cancelar {
-        background-color: #6c757d;
+        flex: 1;
+        background: #6c757d;
         color: #fff;
         border: none;
-        padding: 10px 30px;
+        padding: 14px 30px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        text-decoration: none;
     }
 
         .btn-cancelar:hover {
-            background-color: #5a6268;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(108, 117, 125, 0.5);
+            background: #5a6268;
             color: #fff;
+            text-decoration: none;
         }
+
+    .required-indicator {
+        color: #dc3545;
+        margin-left: 3px;
+    }
+
+    .form-help {
+        font-size: 12px;
+        color: #6c757d;
+        margin-top: 5px;
+        display: block;
+    }
 </style>
 
 <div class="container-fluid">
     <div class="page-header">
-        <h2>Nuevo Usuario</h2>
+        <h2>
+            <i class="fas fa-user-plus"></i>
+            Nuevo Usuario
+        </h2>
     </div>
 
     <div class="form-container">
-        @using (Html.BeginForm("Nuevo", "User", FormMethod.Post, new { @class = "form-horizontal" }))
+        @using (Html.BeginForm("Nuevo", "User", FormMethod.Post, new { @class = "form-horizontal", @id = "formNuevo" }))
         {
             @Html.AntiForgeryToken()
 
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.ValidationSummary(true, "", new { @class = "validation-summary-errors" })
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Nombre, new { @class = "control-label col-md-3" })
-                <div class="col-md-9">
-                    @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control", placeholder = "Ingrese el nombre completo" })
-                    @Html.ValidationMessageFor(m => m.Nombre, "", new { @class = "text-danger" })
+                <label>
+                    <i class="fas fa-user"></i>
+                    @Html.DisplayNameFor(m => m.Nombre)
+                    <span class="required-indicator">*</span>
+                </label>
+                <div class="input-wrapper">
+                    @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control", placeholder = "Nombre completo del usuario" })
+                    <i class="fas fa-user"></i>
                 </div>
+                @Html.ValidationMessageFor(m => m.Nombre, "", new { @class = "text-danger" })
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Usuario, new { @class = "control-label col-md-3" })
-                <div class="col-md-9">
-                    @Html.TextBoxFor(m => m.Usuario, new { @class = "form-control", placeholder = "Ingrese el usuario" })
-                    @Html.ValidationMessageFor(m => m.Usuario, "", new { @class = "text-danger" })
+                <label>
+                    <i class="fas fa-id-badge"></i>
+                    @Html.DisplayNameFor(m => m.Usuario)
+                    <span class="required-indicator">*</span>
+                </label>
+                <div class="input-wrapper">
+                    @Html.TextBoxFor(m => m.Usuario, new { @class = "form-control", placeholder = "Nombre de usuario para login" })
+                    <i class="fas fa-id-badge"></i>
                 </div>
+                @Html.ValidationMessageFor(m => m.Usuario, "", new { @class = "text-danger" })
+                <small class="form-help">Este será el usuario para iniciar sesión</small>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Password, new { @class = "control-label col-md-3" })
-                <div class="col-md-9">
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Ingrese la contraseña" })
-                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                <label>
+                    <i class="fas fa-lock"></i>
+                    @Html.DisplayNameFor(m => m.Password)
+                    <span class="required-indicator">*</span>
+                </label>
+                <div class="input-wrapper">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Contraseña segura" })
+                    <i class="fas fa-lock"></i>
                 </div>
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Email, new { @class = "control-label col-md-3" })
-                <div class="col-md-9">
-                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Ingrese el email", type = "email" })
-                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                <label>
+                    <i class="fas fa-envelope"></i>
+                    @Html.DisplayNameFor(m => m.Email)
+                    <span class="required-indicator">*</span>
+                </label>
+                <div class="input-wrapper">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "correo@ejemplo.com", type = "email" })
+                    <i class="fas fa-envelope"></i>
                 </div>
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Edad, new { @class = "control-label col-md-3" })
-                <div class="col-md-9">
-                    @Html.TextBoxFor(m => m.Edad, new { @class = "form-control", placeholder = "Ingrese la edad", type = "number" })
-                    @Html.ValidationMessageFor(m => m.Edad, "", new { @class = "text-danger" })
+                <label>
+                    <i class="fas fa-birthday-cake"></i>
+                    @Html.DisplayNameFor(m => m.Edad)
+                    <span class="required-indicator">*</span>
+                </label>
+                <div class="input-wrapper">
+                    @Html.TextBoxFor(m => m.Edad, new { @class = "form-control", placeholder = "Edad en años", type = "number", min = "1", max = "120" })
+                    <i class="fas fa-birthday-cake"></i>
                 </div>
+                @Html.ValidationMessageFor(m => m.Edad, "", new { @class = "text-danger" })
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.idEstatus, "Estatus", new { @class = "control-label col-md-3" })
-                <div class="col-md-9">
-                    @Html.DropDownList("idEstatus", (SelectList)ViewBag.Estados, "Seleccione un estatus", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.idEstatus, "", new { @class = "text-danger" })
+                <label>
+                    <i class="fas fa-toggle-on"></i>
+                    Estatus
+                    <span class="required-indicator">*</span>
+                </label>
+                <div class="input-wrapper">
+                    @Html.DropDownList("idEstatus", (SelectList)ViewBag.Estados, "Seleccione un estatus", new { @class = "form-control-select" })
+                    <i class="fas fa-toggle-on"></i>
                 </div>
+                @Html.ValidationMessageFor(m => m.idEstatus, "", new { @class = "text-danger" })
             </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-3 col-md-9">
-                    <button type="submit" class="btn btn-guardar">Guardar</button>
-                    @Html.ActionLink("Cancelar", "Consulta", "User", null, new { @class = "btn btn-cancelar" })
-                </div>
+            <div class="btn-actions">
+                <button type="submit" class="btn-guardar">
+                    <i class="fas fa-save"></i>
+                    <span>Guardar Usuario</span>
+                </button>
+                @Html.ActionLink("Cancelar", "Consulta", "User", null, new { @class = "btn-cancelar" })
             </div>
         }
     </div>
@@ -131,4 +368,60 @@
 @section Scripts {
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function () {
+            // Animación en inputs
+            $('.form-control, .form-control-select').on('focus', function () {
+                $(this).parent().find('i').css({
+                    'color': '#764ba2',
+                    'transform': 'translateY(-50%) scale(1.1)'
+                });
+            }).on('blur', function () {
+                $(this).parent().find('i').css({
+                    'color': '#667eea',
+                    'transform': 'translateY(-50%) scale(1)'
+                });
+            });
+
+            // Validación personalizada
+            $('#formNuevo').on('submit', function (e) {
+                if (!$(this).valid()) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error de validación',
+                        text: 'Por favor complete todos los campos correctamente',
+                        confirmButtonColor: '#667eea'
+                    });
+                    return false;
+                }
+            });
+
+            // Confirmación antes de cancelar si hay cambios
+            var formChanged = false;
+            $('.form-control, .form-control-select').on('change', function () {
+                formChanged = true;
+            });
+
+            $('.btn-cancelar').on('click', function (e) {
+                if (formChanged) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: '¿Desea cancelar?',
+                        text: "Los cambios no guardados se perderán",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#6c757d',
+                        cancelButtonColor: '#667eea',
+                        confirmButtonText: 'Sí, cancelar',
+                        cancelButtonText: 'Continuar editando'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = $(this).attr('href');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 }
