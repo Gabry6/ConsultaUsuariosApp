@@ -1,0 +1,112 @@
+﻿@model ConsultaUsuariosApp.ViewModels.LoginViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .login-header {
+            background-color: #212121;
+            color: #fff;
+            padding: 30px 20px;
+            border-radius: 5px 5px 0 0;
+            text-align: center;
+        }
+
+            .login-header h2 {
+                margin: 0;
+                font-size: 18px;
+                font-weight: normal;
+            }
+
+        .login-body {
+            padding: 30px;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: #555;
+        }
+
+        .btn-login {
+            background-color: #5cb85c;
+            border-color: #4cae4c;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px 30px;
+        }
+
+            .btn-login:hover {
+                background-color: #449d44;
+                border-color: #398439;
+            }
+
+        .login-footer {
+            padding: 20px;
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h2>Crear un inicio de sesión de usuario tomando como base la siguiente imagen</h2>
+        </div>
+
+        <div class="login-body">
+            @using (Html.BeginForm("Login", "Acceder", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Usuario, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Usuario, new { @class = "form-control", placeholder = "Ingrese su usuario" })
+                    @Html.ValidationMessageFor(m => m.Usuario, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Ingrese su contraseña" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-login">Entrar</button>
+                </div>
+            }
+        </div>
+
+        <div class="login-footer">
+            &copy; 2024 - 2024 C3 P3 SS08
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>

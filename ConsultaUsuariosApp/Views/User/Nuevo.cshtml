@@ -1,0 +1,134 @@
+﻿@model ConsultaUsuariosApp.ViewModels.AddUserViewModel
+
+@{
+    ViewBag.Title = "Nuevo Usuario";
+    Layout = "~/Views/Shared/_LayoutApp.cshtml";
+}
+
+<style>
+    .page-header {
+        background-color: #212121;
+        color: #fff;
+        padding: 20px;
+        margin: -30px -15px 30px -15px;
+        border-radius: 5px;
+    }
+
+        .page-header h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+    .form-container {
+        background: #fff;
+        padding: 30px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        max-width: 600px;
+    }
+
+    .form-group label {
+        font-weight: 500;
+        color: #333;
+    }
+
+    .btn-guardar {
+        background-color: #5cb85c;
+        color: #fff;
+        border: none;
+        padding: 10px 30px;
+        margin-right: 10px;
+    }
+
+        .btn-guardar:hover {
+            background-color: #449d44;
+            color: #fff;
+        }
+
+    .btn-cancelar {
+        background-color: #6c757d;
+        color: #fff;
+        border: none;
+        padding: 10px 30px;
+    }
+
+        .btn-cancelar:hover {
+            background-color: #5a6268;
+            color: #fff;
+        }
+</style>
+
+<div class="container-fluid">
+    <div class="page-header">
+        <h2>Nuevo Usuario</h2>
+    </div>
+
+    <div class="form-container">
+        @using (Html.BeginForm("Nuevo", "User", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Nombre, new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control", placeholder = "Ingrese el nombre completo" })
+                    @Html.ValidationMessageFor(m => m.Nombre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Usuario, new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.Usuario, new { @class = "form-control", placeholder = "Ingrese el usuario" })
+                    @Html.ValidationMessageFor(m => m.Usuario, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password, new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Ingrese la contraseña" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Ingrese el email", type = "email" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Edad, new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.TextBoxFor(m => m.Edad, new { @class = "form-control", placeholder = "Ingrese la edad", type = "number" })
+                    @Html.ValidationMessageFor(m => m.Edad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.idEstatus, "Estatus", new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.DropDownList("idEstatus", (SelectList)ViewBag.Estados, "Seleccione un estatus", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.idEstatus, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <button type="submit" class="btn btn-guardar">Guardar</button>
+                    @Html.ActionLink("Cancelar", "Consulta", "User", null, new { @class = "btn btn-cancelar" })
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

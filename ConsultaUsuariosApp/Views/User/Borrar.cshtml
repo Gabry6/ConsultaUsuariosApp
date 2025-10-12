@@ -1,0 +1,149 @@
+﻿@model ConsultaUsuariosApp.ViewModels.DeleteUserViewModel
+
+@{
+    ViewBag.Title = "Eliminar Usuario";
+    Layout = "~/Views/Shared/_LayoutApp.cshtml";
+}
+
+<style>
+    .page-header {
+        background-color: #212121;
+        color: #fff;
+        padding: 20px;
+        margin: -30px -15px 30px -15px;
+        border-radius: 5px;
+    }
+
+        .page-header h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+    .delete-container {
+        background: #fff;
+        padding: 30px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        max-width: 600px;
+    }
+
+    .alert-warning-custom {
+        background-color: #fcf8e3;
+        border: 1px solid #faebcc;
+        color: #8a6d3b;
+        padding: 15px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+
+        .alert-warning-custom h4 {
+            margin-top: 0;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+    .user-details {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+
+        .user-details dl {
+            margin-bottom: 0;
+        }
+
+        .user-details dt {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .user-details dd {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+    .btn-eliminar {
+        background-color: #d9534f;
+        color: #fff;
+        border: none;
+        padding: 10px 30px;
+        margin-right: 10px;
+    }
+
+        .btn-eliminar:hover {
+            background-color: #c9302c;
+            color: #fff;
+        }
+
+    .btn-cancelar {
+        background-color: #6c757d;
+        color: #fff;
+        border: none;
+        padding: 10px 30px;
+    }
+
+        .btn-cancelar:hover {
+            background-color: #5a6268;
+            color: #fff;
+        }
+</style>
+
+<div class="container-fluid">
+    <div class="page-header">
+        <h2>Eliminar Usuario</h2>
+    </div>
+
+    <div class="delete-container">
+        <div class="alert-warning-custom">
+            <h4>⚠️ Advertencia</h4>
+            <p>¿Está seguro que desea eliminar este usuario? Esta acción marcará el usuario como "BORRADO" y no podrá iniciar sesión.</p>
+        </div>
+
+        <div class="user-details">
+            <h4>Detalles del Usuario</h4>
+            <dl class="dl-horizontal">
+                <dt>ID:</dt>
+                <dd>@Model.ID</dd>
+
+                <dt>Nombre:</dt>
+                <dd>@Model.Nombre</dd>
+
+                <dt>Usuario:</dt>
+                <dd>@Model.Usuario</dd>
+
+                <dt>Email:</dt>
+                <dd>@Model.Email</dd>
+
+                <dt>Edad:</dt>
+                <dd>@Model.Edad</dd>
+
+                <dt>Estado Actual:</dt>
+                <dd>
+                    @if (Model.Status == "ACTIVO")
+                    {
+                        <span class="label label-success">@Model.Status</span>
+                    }
+                    else
+                    {
+                        <span class="label label-warning">@Model.Status</span>
+                    }
+                </dd>
+            </dl>
+        </div>
+
+        @using (Html.BeginForm("Borrar", "User", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("id", Model.ID)
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-eliminar">
+                    <span class="glyphicon glyphicon-trash"></span> Confirmar Eliminación
+                </button>
+                @Html.ActionLink("Cancelar", "Consulta", "User", null, new { @class = "btn btn-cancelar" })
+            </div>
+        }
+    </div>
+</div>

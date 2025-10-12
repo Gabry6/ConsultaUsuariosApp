@@ -1,0 +1,171 @@
+﻿@model IEnumerable<ConsultaUsuariosApp.ViewModels.QueryViewModel>
+
+@{
+    ViewBag.Title = "Consulta de Usuarios";
+    Layout = "~/Views/Shared/_LayoutApp.cshtml";
+}
+
+<style>
+    .page-header {
+        background-color: #212121;
+        color: #fff;
+        padding: 20px;
+        margin: -30px -15px 30px -15px;
+        border-radius: 5px;
+    }
+
+        .page-header h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+    .action-buttons {
+        margin-bottom: 20px;
+    }
+
+    .btn-nuevo {
+        background-color: #0275d8;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        margin-right: 10px;
+    }
+
+        .btn-nuevo:hover {
+            background-color: #025aa5;
+            color: #fff;
+        }
+
+    .btn-volver {
+        background-color: #6c757d;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+    }
+
+        .btn-volver:hover {
+            background-color: #5a6268;
+            color: #fff;
+        }
+
+    .table-custom {
+        background: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+        .table-custom thead {
+            background-color: #0275d8;
+            color: #fff;
+        }
+
+            .table-custom thead th {
+                border: none;
+                padding: 15px;
+                font-weight: 500;
+            }
+
+        .table-custom tbody td {
+            padding: 12px 15px;
+            vertical-align: middle;
+        }
+
+    .btn-borrar {
+        background-color: #d9534f;
+        color: #fff;
+        border: none;
+        padding: 5px 15px;
+        margin-right: 5px;
+    }
+
+        .btn-borrar:hover {
+            background-color: #c9302c;
+            color: #fff;
+        }
+
+    .btn-editar {
+        background-color: #5cb85c;
+        color: #fff;
+        border: none;
+        padding: 5px 15px;
+    }
+
+        .btn-editar:hover {
+            background-color: #449d44;
+            color: #fff;
+        }
+
+    .badge-status {
+        padding: 5px 10px;
+        border-radius: 3px;
+        font-size: 12px;
+    }
+
+    .badge-activo {
+        background-color: #5cb85c;
+        color: #fff;
+    }
+
+    .badge-inactivo {
+        background-color: #f0ad4e;
+        color: #fff;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="page-header">
+        <h2>Consulta Usuario</h2>
+    </div>
+
+    <div class="action-buttons">
+        @Html.ActionLink("Nuevo", "Nuevo", "User", null, new { @class = "btn btn-nuevo" })
+        @Html.ActionLink("Volver Atrás", "Logout", "CerrarSession", null, new { @class = "btn btn-volver" })
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-custom">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Email</th>
+                    <th>Edad</th>
+                    <th>Status</th>
+                    <th style="text-align: center;">Acción a Tomar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ID</td>
+                            <td>@item.Email</td>
+                            <td>@item.Edad</td>
+                            <td>
+                                @if (item.Status == "ACTIVO")
+                                {
+                                    <span class="badge-status badge-activo">@item.Status</span>
+                                }
+                                else
+                                {
+                                    <span class="badge-status badge-inactivo">@item.Status</span>
+                                }
+                            </td>
+                            <td style="text-align: center;">
+                                @Html.ActionLink("Borrar", "Borrar", new { id = item.ID }, new { @class = "btn btn-borrar btn-sm" })
+                                @Html.ActionLink("Editar", "Editar", new { id = item.ID }, new { @class = "btn btn-editar btn-sm" })
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5" style="text-align: center;">No hay usuarios registrados</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
